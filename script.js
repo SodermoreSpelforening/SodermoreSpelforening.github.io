@@ -37,49 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error("Footer error:", error));
 });
 
-// Modal hantering
-const modal = document.getElementById("myModal");
-const btn = document.getElementById("myBtn");
-const span = document.getElementsByClassName("close")[0];
+// Hanterar menyvisning på mobiler
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-menu");
 
-// Kontrollera om btn och span finns innan vi försöker sätta eventlyssnare
-if (btn) {
-    btn.onclick = function () {
-        modal.style.display = "block";
-    };
-}
-
-if (span) {
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-}
-
-// När användaren klickar var som helst utanför modalen, stäng den
-if (modal) {
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-}
-
-// Lightbox funktion
-const lightbox = document.querySelector('.lightbox');
-const images = document.querySelectorAll('img');
-
-// Lägg till klickhändelse på alla bilder om lightbox finns
-if (lightbox) {
-    images.forEach(img => {
-        img.addEventListener('click', function () {
-            const src = img.src;
-            lightbox.innerHTML = `<img src="${src}" alt="Ljusbox bild">`;
-            lightbox.classList.add('active');
-        });
-    });
-
-    // Stäng lightbox när användaren klickar på den
-    lightbox.addEventListener('click', function () {
-        lightbox.classList.remove('active');
-    });
-}
+menuToggle.addEventListener("click", () => {
+  const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+  menuToggle.setAttribute("aria-expanded", !isExpanded);
+  navMenu.classList.toggle("show");
+});
